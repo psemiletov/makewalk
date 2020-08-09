@@ -142,7 +142,7 @@ def readBvhFile(context, filepath, scn, scan):
         raise MocapError("Not a bvh file: " + fileName)
     startProgress( "Loading BVH file "+ fileName )
 
-    time1 = time.clock()
+#    time1 = time.clock()
     level = 0
     nErrors = 0
     coll = getCollection(context)
@@ -169,7 +169,9 @@ def readBvhFile(context, filepath, scn, scan):
             rig = bpy.data.objects.new("BvhRig", amt)
             coll.objects.link(rig)
             setActiveObject(context, rig)
-            context.scene.update()
+#            context.scene.update()
+            layer = bpy.context.view_layer
+            layer.update()
             bpy.ops.object.mode_set(mode='EDIT')
             bpy.ops.object.mode_set(mode='EDIT')
             root.build(amt, Vector((0,0,0)), None)
@@ -246,8 +248,8 @@ def readBvhFile(context, filepath, scn, scan):
     if not rig:
         raise MocapError("Bvh file \n%s\n is corrupt: No rig defined" % filepath)
     setInterpolation(rig)
-    time2 = time.clock()
-    endProgress("Bvh file %s loaded in %.3f s" % (filepath, time2-time1))
+#    time2 = time.clock()
+#    endProgress("Bvh file %s loaded in %.3f s" % (filepath, time2-time1))
     if frameno == 1:
         print("Warning: No frames in range %d -- %d." % (startFrame, endFrame))
     renameBvhRig(rig, filepath)
