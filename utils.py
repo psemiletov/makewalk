@@ -593,7 +593,7 @@ def getObjectProblems(self, context):
 
     if self.problems:
         wm = context.window_manager
-        return wm.invoke_props_dialog(self, width=300, height=20)
+        return wm.invoke_props_dialog(self, width=300)
     else:
         return False
 
